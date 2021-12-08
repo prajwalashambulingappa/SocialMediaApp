@@ -1,0 +1,33 @@
+.navbar_barcontent{
+    height: 4rem;
+    border-bottom: 0.06rem solid white;
+    text-decoration-color: black;
+    }
+.navbar_logo{
+    margin-top: 0.5rem;
+}
+.navbar_img{
+    height: 2rem;
+    margin: 0.8rem 0.8rem;
+    margin-left: 0.5rem;
+}
+.navbar_search{
+    height: 1.9rem;
+    width: 13.2rem;
+    margin-top: 0.6rem;
+    border: 0.06rem solid white;
+    text-align: center;
+    text-decoration-color: white;
+    color: black;
+    background-color: white;
+    border-radius: 0.3rem;
+}
+
+.logoutbutton{
+    height: 2.6rem;
+    margin: 0.8rem 0.8rem;
+    margin-left: 0.2rem;
+    border: none;
+    padding-top: -1rem;
+    /* background-color: #BDCBF1; */
+}
