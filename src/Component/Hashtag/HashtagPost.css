@@ -1,0 +1,70 @@
+
+.post_container{
+    margin-top: 0.2rem;
+    border-radius: 0.6rem;
+    width: 54rem;
+    border: 0.2rem solid white;
+}
+
+.post_header{
+    height: 3.7rem;
+    width: 54rem;
+    border-bottom: 0.06rem dotted white;
+    display: flex;
+}
+
+.Caption{
+    padding-left: 1rem;
+    padding-top: 1.5rem;
+    text-align: justify;
+}
+.post_image{
+    min-width: 2.8rem;
+    min-height: 2.8rem;   
+    margin: 0.6rem; 
+}
+
+.post_user{
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-weight: bold;
+    margin-top: 1.25rem;
+    margin-left: 0.5rem;
+}
+
+.post_reactimage{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 1rem;
+    margin-bottom: 0.4rem;
+    margin-top: 1.5rem;
+}
+
+.dummy_likes{
+    color: black;
+    margin-left: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+}
+
+.dummy_comments{
+    color: black;
+    margin-bottom: 0.8rem;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+}
+
+.post_commentbox{
+    height: 1.9rem;
+    width: 37.5rem;
+    border: 0.1rem solid white;
+    border-radius: 0.8rem;
+    background-color: white;
+    color: black;
+    margin-left: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+.hashtag-span{
+    margin-right: 1rem;
+}

@@ -6,6 +6,7 @@ import comment from "../../images/postcomment.jpg";
 import share from "../../images/postshare.jpg";
 import { Link } from "react-router-dom";
 import AllComments from "../Comment/AllComments";
+import AllLikes from "../Like/AllLikes";
 
 const Post = (props) => {
   const imageResourceUrl = "https://drive.google.com/uc?export=view&id=";
@@ -103,6 +104,12 @@ const Post = (props) => {
           <AllComments
             postId={props.id}
             closeCommentsModal={closeCommentsModal}
+          />
+        )}
+         {likesButtonClicked && (
+          <AllLikes
+            postId={props.id}
+            closeLikesModal={closeLikesModal}
           />
         )}
       </div>
