@@ -32,12 +32,21 @@
     margin-left: 0.5rem;
 }
 
-.post_reactimage{
+.post_reactimageinpostfile{
     width: 1.5rem;
     height: 1.5rem;
     margin-right: 1rem;
     margin-bottom: 0.4rem;
     margin-top: 1.5rem;
+}
+
+.post_reactimageinpostfile_liked{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 1rem;
+    margin-bottom: 0.4rem;
+    margin-top: 1.5rem;
+    background-color: red;
 }
 
 .dummy_likes{
