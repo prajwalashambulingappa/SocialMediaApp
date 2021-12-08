@@ -1,17 +1,52 @@
-import React, { Component, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../Post/Post.css";
 import Avatar from "@mui/material/Avatar";
 import like from "../../images/postlike.jpg";
 import comment from "../../images/postcomment.jpg";
-import share from "../../images/postshare.jpg";
 import { Link } from "react-router-dom";
 import AllComments from "../Comments/AllComments";
 import ReactRoundedImage from "react-rounded-image";
+import AllComments from "../Comment/AllComments";
+import AllLikes from "../Like/AllLikes";
+import { addLikeToPostLink, checkPostIsLikedLink, deleteLikePostLink } from "../../URL/Url";
+import AppAuthContext from "../../context/app-auth-context";
+import CommentInput from "../Comment/CommentInput";
 
 const Post = (props) => {
   const imageResourceUrl = "https://drive.google.com/uc?export=view&id=";
   const [commentsButtonClicked, setCommentsButtonClicked] = useState(false);
   const [likesButtonClicked, setLikesButtonClicked] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [numLikes,setNumLikes] = useState(props.likes);
+  const appCtx = useContext(AppAuthContext);
+  const [numComments,setNumComments]=useState(props.comments);
+
+  useEffect(() => {
+    const checkThisPostHasAlreadyBeenLiked = async () => {
+      const response = await fetch(
+        checkPostIsLikedLink +
+          `/${appCtx.token["socialMediaAppCookie"]}/${props.id}`
+      );
+
+      if (!response.ok) {
+        throw new Error("check failed");
+      }
+
+      const data = await response.json();
+      //console.log(data);
+      if (data.status === 200) {
+        setIsLiked(true);
+      }
+    };
+
+    try {
+      checkThisPostHasAlreadyBeenLiked().catch((error) =>
+        console.log(error.message)
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  });
 
   const closeCommentsModal = () => {
     setCommentsButtonClicked(false);
@@ -26,9 +61,64 @@ const Post = (props) => {
     setLikesButtonClicked(true);
   };
 
+  const addCommentsHandler = () =>{
+    setNumComments(prevComments=>prevComments+1);
+  }
+
+  const addLikeHandler = () => {
+    //console.log("clicked");
+    if (!isLiked) {
+      fetch(addLikeToPostLink, {
+        method: "POST",
+        body: JSON.stringify({
+          postId: props.id,
+          likeUserEmail: appCtx.token["socialMediaAppCookie"],
+          likeUsername: "--",
+          likeUserProfilePicUrl: "",
+        }),
+        headers:{
+          "Content-Type":"application/json"
+        }
+      }).then(response=>{
+        if(!response.ok){
+          throw new Error("error");
+        }
+        return response.json();
+      }).then(data=>{
+        //console.log(data);
+        setIsLiked(true);
+        setNumLikes(prevLikes=>prevLikes+1);
+
+      })
+    }
+    if (isLiked) {
+      fetch(deleteLikePostLink+`/${appCtx.token["socialMediaAppCookie"]}/${props.id}`,{
+        method:"DELETE"
+      }).then(response=>{
+        if(!response.ok){
+          throw new Error("error");
+        }
+        return response.json();
+      }).then(data=>{
+        //console.log(data);
+        setIsLiked(false);
+        setNumLikes(prevLikes=>prevLikes-1);
+      })
+    }
+  };
+
   let hashtags = [];
   for (const tag in props.hashtags) {
     hashtags.push(props.hashtags[tag]);
+  }
+
+  let postImageUrl = "";
+  let propsImageUrl="";
+  propsImageUrl = props.postimage;
+  if(propsImageUrl.startsWith("https:")){
+    postImageUrl = propsImageUrl; 
+  }else{
+    postImageUrl = imageResourceUrl + propsImageUrl;
   }
 
   return (
@@ -42,7 +132,8 @@ const Post = (props) => {
       {/* Image*/}
       <div className="imageDiv">
         <img
-          src={imageResourceUrl + props.postimage}
+        
+          src={postImageUrl}
           alt="post"
           
         />
@@ -55,7 +146,6 @@ const Post = (props) => {
           return (
             <span className="hashtag-span" key={tag}>
               {
-              (
                 <Link
                   to={{
                     pathname: "/hashtag-posts",
@@ -64,9 +154,9 @@ const Post = (props) => {
                     },
                   }}
                 >
-                  {'#'+tag}
+                  {"#" + tag}
                 </Link>
-              )}
+              }
             </span>
           );
         })}
@@ -75,26 +165,35 @@ const Post = (props) => {
       {/* Like count */}
       <div>
         <div style={{ marginLeft: "1rem" }}>
-          <img src={like} className="post_reactimage" alt="react" />
+          <img
+            src={like}
+            onClick={addLikeHandler}
+            className={
+              isLiked === true
+                ? "post_reactimageinpostfile_liked"
+                : "post_reactimageinpostfile"
+            }
+            alt="react"
+          />
           <img src={comment} className="post_reactimage" alt="react" />
           {/* <img src= {share} className="post_reactimage" alt="react" /> */}
         </div>
-        {props.likes === 0 ? (
+        {numLikes === 0 ? (
           <p> 0 likes</p>
         ) : (
           <div className="dummy_likes">
-            {props.likes} <button onClick={openLikesModal}>Likes </button>{" "}
+            {numLikes} <button onClick={openLikesModal}>Likes </button>{" "}
           </div>
         )}
 
-        {props.comments === 0 ? (
+        {numComments === 0 ? (
           <p>
             {" "}
             <i>no comments yet</i>{" "}
           </p>
         ) : (
           <div className="dummy_likes">
-            {props.comments}{" "}
+            {numComments}{" "}
             <button onClick={openCommentsModal}> Comments </button>{" "}
           </div>
         )}
@@ -105,13 +204,12 @@ const Post = (props) => {
             closeCommentsModal={closeCommentsModal}
           />
         )}
+        {likesButtonClicked && (
+          <AllLikes postId={props.id} closeLikesModal={closeLikesModal} />
+        )}
       </div>
 
-      <input
-        text="text"
-        className="post_commentbox"
-        placeholder=" Add a comment.."
-      />
+      <CommentInput postId={props.id} updateNumComments={addCommentsHandler} />
     </div>
   );
 };

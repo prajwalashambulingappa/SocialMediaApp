@@ -30,6 +30,15 @@ const HashtagPost = (props) => {
     hashtags.push(props.hashtags[tag]);
   }
 
+  let postImageUrl = "";
+  let propsImageUrl="";
+  propsImageUrl = props.postimage;
+  if(propsImageUrl.startsWith("https:")){
+    postImageUrl = propsImageUrl; 
+  }else{
+    postImageUrl = imageResourceUrl + propsImageUrl;
+  }
+
   return (
     <div className="post_container">
       {/* Header */}
@@ -41,7 +50,7 @@ const HashtagPost = (props) => {
       {/* Image*/}
       <div>
         <img
-          src={imageResourceUrl + props.postimage}
+          src={postImageUrl}
           alt="post"
           width="860rem"
           height="700rem"
