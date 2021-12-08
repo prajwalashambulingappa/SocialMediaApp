@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import "../MainContent/MainContent.css";
+// import "../MainContent/MainContent.css";
 import Grid from '@mui/material/Grid';
 import Statusbar from "../Statusbar/Statusbar";
 import MainPage from "../MainPage/MainPage";

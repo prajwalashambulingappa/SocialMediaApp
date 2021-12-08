@@ -4,11 +4,14 @@ import Avatar from "@mui/material/Avatar";
 import like from "../../images/postlike.jpg";
 import comment from "../../images/postcomment.jpg";
 import { Link } from "react-router-dom";
+import AllComments from "../Comments/AllComments";
+import ReactRoundedImage from "react-rounded-image";
 import AllComments from "../Comment/AllComments";
 import AllLikes from "../Like/AllLikes";
 import { addLikeToPostLink, checkPostIsLikedLink, deleteLikePostLink } from "../../URL/Url";
 import AppAuthContext from "../../context/app-auth-context";
 import CommentInput from "../Comment/CommentInput";
+
 const Post = (props) => {
   const imageResourceUrl = "https://drive.google.com/uc?export=view&id=";
   const [commentsButtonClicked, setCommentsButtonClicked] = useState(false);
@@ -122,18 +125,17 @@ const Post = (props) => {
     <div className="post_container">
       {/* Header */}
       <div className="post_header">
-        <Avatar className="post_image" src={props.profileimage} alt="post" />
+        <img className="post_image" src= {imageResourceUrl + props.profileImage} alt="post" />
         <div className="post_user">{props.user}</div>
       </div>
 
       {/* Image*/}
-      <div>
+      <div className="imageDiv">
         <img
         
           src={postImageUrl}
           alt="post"
-          width="860rem"
-          height="700rem"
+          
         />
       </div>
 
