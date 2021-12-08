@@ -1,54 +1,36 @@
 import { useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router-dom";
 import { allCommentsLink } from "../../URL/Url";
+import AllCommentsModal from "./AllCommentsModal";
+
+const AllComments = (props) => {
+  const [fetchedReviews, setFetchedReviews] = useState([]);
+  const postId = props.postId;
 
 
-const AllComments = () => {
-  const [fetchedReviews , setFetchedReviews] = useState([]);
-    const location = useLocation();
-    const params = location.state;
-    const history = useHistory();
-    if(!params){
-        history.goBack();
-    }
+  useEffect(() => {
+    const fetchAllComments = async () => {
+      const response = await fetch(allCommentsLink + `/${postId}`);
 
-    const postId = params.postId;
+      const data = await response.json();
 
-    
+      setFetchedReviews(data);
+      console.log(data);
+    };
 
-    useEffect(()=>{
+    try {
+      fetchAllComments();
+    } catch (error) {}
+  }, [postId]);
 
-        const fetchAllComments = async () => {
-            const response =  await fetch(allCommentsLink+`/${postId}`);
+  //console.log('fetchedreviews:',fetchedReviews);
 
-            const data = await response.json();
-
-
-            setFetchedReviews(data);
-            console.log(data);
-        }
-
-        try {
-            fetchAllComments();
-        } catch (error) {
-            
-        }
-    },[postId])
-
-
-    return (
-        <div>
-           {
-               fetchedReviews.map( comment => {
-                   <div key={comment.id}>
-                        <h3>{comment.commentedUserEmail}</h3>
-                         <p> {comment.comment} </p>
-                       </div>
-               } )
-           }
-        </div>
-    )
+  return (
+    <div>
+      <h1> All Comments </h1>
+      <AllCommentsModal comments={fetchedReviews} close={props.closeCommentsModal} open={true} />
+    </div>
+  );
 };
-
 
 export default AllComments;
