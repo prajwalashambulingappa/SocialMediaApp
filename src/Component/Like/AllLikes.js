@@ -14,7 +14,7 @@ const AllLikes = (props) => {
       const data = await response.json();
 
       setFetchedLikes(data);
-      console.log(data);
+      //console.log(data);
     };
 
     try {

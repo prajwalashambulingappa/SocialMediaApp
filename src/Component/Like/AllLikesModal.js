@@ -38,6 +38,8 @@ const AllLikesModal = (props) => {
           <div key={like.id}>
              <img src={like.likeUserProfilePicUrl} alt="liked user's profile pic"/>
              <p> {like.likeUsername}</p>
+             <p> {like.likeUserEmail}</p>
+             <hr />
           </div>
         );
       })}

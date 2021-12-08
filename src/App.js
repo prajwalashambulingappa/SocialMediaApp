@@ -8,6 +8,7 @@ import Upload from './Component/Post/Upload';
 import AppAuthContext  from './context/app-auth-context';
 import { useNavigate } from "react-router-dom";
 import AllComments from './Component/Comment/AllComments';
+import HashtagPosts from './Component/Hashtag/HashtagPosts';
 function App() {
 
   const history = useHistory();
@@ -16,9 +17,9 @@ function App() {
      history.push("/");
   }
 
-  if(appContext.isLoggedIn){
-    history.push("/home");
-  }
+  // if(appContext.isLoggedIn){
+  //   history.push("/home");
+  // }
 
   return (
     <div className="App">      
@@ -27,10 +28,11 @@ function App() {
         
         <Route path="/" exact > <LoginPage /> </Route>
 
-        <Route path="/all-comments" exact > <AllComments /> </Route>
+        <Route path="/hashtag-posts" exact > <HashtagPosts /> </Route>
 
 
-        <Route path="/upload" > <Upload /> </Route>
+        <Route path="/upload" exact > <Upload />  </Route>
+
         
       </Switch>
       
