@@ -11,7 +11,7 @@ import linkedin from "../../images/linkedin.jpg";
 import facebook from "../../images/facebook.jpg";
 import insta from "../../images/insta.png";
 import youtube from "../../images/youtube_.jpg";
-//import { fontSize } from "@mui/system";
+import { fontSize } from "@mui/system";
 
 class LoginPage extends Component {
   constructor(props) {

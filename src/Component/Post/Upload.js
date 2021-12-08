@@ -5,7 +5,6 @@ import storage from "../firebase";
 const Upload = (props) =>{
     const [imagesAsFiles, setImagesAsFiles] = useState(null);
     const [imagesAsUrl, setImagesAsUrl] = useState([]);
-    const [postCaptionInput,setPostCaptionInput] = useState('');
     const realUrls = [];
   
     console.log(imagesAsFiles);
@@ -69,9 +68,8 @@ const Upload = (props) =>{
     };
     console.log(realUrls);
     return (
-      <div className="upload-page">
-        <h1>Upload</h1>
-        <p> <i> You can upload any number of images and small video clips </i> </p>
+      <div className="App">
+        <h1>Welcome</h1>
         <form onSubmit={formSubmitHandler}>
           <input
             type="file"
@@ -80,12 +78,8 @@ const Upload = (props) =>{
             accept="image/png, image/jpeg , video/mp4"
             onChange={filesInputHandler}
           />
-          <textarea className="caption-input" onChange={event=>setPostCaptionInput(event.target.value)} value={postCaptionInput}/>
-
-           
           <button type="submit">Submit</button>
         </form>
-        <div> 
         {realUrls.map((url) => (
           <img
             key={url}
@@ -94,7 +88,6 @@ const Upload = (props) =>{
             style={{ height: "30rem", width: "30rem", margin: "2rem" }}
           />
         ))}
-        </div>
       </div>
     )
 }

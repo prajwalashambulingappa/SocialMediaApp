@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 import Home from './Component/HomePage/Home';
 import LoginPage from './Component/LoginPage/LoginPage';
 import { useState , useContext} from 'react';
@@ -7,7 +7,8 @@ import GoogleLogin from "react-google-login";
 import Upload from './Component/Post/Upload';
 import AppAuthContext  from './context/app-auth-context';
 import { useNavigate } from "react-router-dom";
-import AllComments from './Component/Comment/AllComments';
+import ReactRoundedImage from "react-rounded-image"
+import AllComments from './Component/Comments/AllComments';
 function App() {
 
   const history = useHistory();

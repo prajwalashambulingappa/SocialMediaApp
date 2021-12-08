@@ -5,7 +5,6 @@ import uploadimg from "../../images/uploadicon.jpg";
 import thoughticon from "../../images/thoughticon.jpg.png";
 import annocicon from "../../images/announcement.jpg.png";
 import { fetchHomePagePostlink } from "../../URL/Url";
-import { Link } from "react-router-dom";
 const MainPage =()=> {
 
     
@@ -24,9 +23,8 @@ const MainPage =()=> {
 
             const data = await response.json();
             setIsLoading(false);
-            //console.log(data);
             setFetchedItems(data);
-            
+            console.log(data);
         }
 
         try {
@@ -53,7 +51,7 @@ const MainPage =()=> {
             <div style={{ marginLeft: "15rem" }}>
               {/*Upload using the firebase*/}
 
-              <Link to="/upload"> <img className="post_upload" src={uploadimg} alt="upload" /> </Link>
+              <img className="post_upload" src={uploadimg} alt="upload" />
               <div className="upload_text">Uploads! </div>
             </div>
 
@@ -88,11 +86,11 @@ const MainPage =()=> {
               id={item.postId}
               user={item.postUsername}
               postimage={item.postUrl}
+              profileImage={item.postUserProfilePicUrl}
               postcaption ={item.postCaption}
               likes={item.likes}
               comments={item.comments}
               time = {item.postedTime}
-              hashtags={item.hashtags}
             />
           ))}
         </div>
