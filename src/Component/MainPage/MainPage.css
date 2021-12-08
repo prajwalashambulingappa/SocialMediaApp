@@ -1,0 +1,12 @@
+.post_upload{
+    height: 3.75rem;
+    width: 3.12rem;
+    margin: 0.3rem;
+    align-content: center;
+}
+
+.upload_text{
+    font-weight: bold;
+    margin-bottom: 0.12rem;
+    text-align: center;
+}
