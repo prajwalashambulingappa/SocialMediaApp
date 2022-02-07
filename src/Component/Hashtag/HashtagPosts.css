@@ -1,0 +1,33 @@
+.hashtag-posts-page{
+
+
+
+    background-image: url("../../images/homebackground.jpg");
+    
+    background-repeat:no-repeat;
+    
+    background-position:center;
+    
+    background-size:cover;
+    
+    height: 100%;
+    
+    width:100%;
+    
+    }
+    
+    
+    
+    .mainDiv{
+    
+    margin-left: 15rem;
+    
+    }
+    
+    
+    
+    .postsDiv{
+    
+    margin-top: 1rem;
+    
+    }
